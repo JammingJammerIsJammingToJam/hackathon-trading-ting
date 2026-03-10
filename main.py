@@ -84,15 +84,15 @@ class Stock:
     if sell_amount > buy_amount:
       self.sell_orders[0][1] -= buy_amount
       self.buy_orders.pop(0)
-      sold = self.buy_amount
+      sold = buy_amount
     elif sell_amount == buy_amount:
       self.sell_orders.pop(0)
       self.buy_orders.pop(0)
-      sold = self.buy_amount
+      sold = buy_amount
     else:
       self.buy_orders[0][1] -= sell_amount
       self.sell_orders.pop(0)
-      sold = self.sell_amount
+      sold = sell_amount
     
     total = sold * sell_price
     refund = sold * (buy_price - sell_price)
