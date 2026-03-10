@@ -97,6 +97,8 @@ class Stock:
     total = sold * sell_price
     refund = sold * (buy_price - sell_price)
     #Increase available funds for seller by total and buyer by refund
+    #Increase stock for buyer by sold
+
 
 
 
