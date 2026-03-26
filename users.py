@@ -2,6 +2,9 @@ from nme import NME_Decode_File, NME_Encode_File
 import os
 
 """
+Stocks:
+    Apple, Banana, Cherry, Dragonfruit, and Elderflower
+
 User is stored as:
 Username/Cash/Stock1/Stock2/Stock3/Stock4/Stock5/
     0     1     2      3      4      5      6
@@ -11,14 +14,63 @@ NME slashnum = 7
 class User:
     def __init__(self):
         self.user_file  = []
+        self.stocks = [None, None, 'Apple', 'Banana', 'Cherry', 'Dragonfruit', 'Elderflower']
     
     def Import_From_NME(self):
-        if os.path.isfile('users.nme'):
-            self.user_file = NME_Decode_File('users.nme')
-        else:
+        if not os.path.isfile('users.nme'):
             with open('users.nme', 'w') as file_contents:
                 file_contents.write(str(7) + '\n')
-            self.Import_From_NME()
+        self.user_file = NME_Decode_File('users.nme')
+
+    def Export_To_NME(self):
+        with open('users.nme', 'w') as file_contents:
+            file_contents.write(NME_Encode_File(self.user_file))
+
+    def Enough_Cash(self, username, change):
+        if len(self.user_file) == 0:
+            raise ValueError('user_file is empty????????????????')
+
+        if change >= 0:
+            return True
+        else:
+            for i, user in enumerate(self.user_file):
+                if user == username:
+                    return (self.user_file[i][1] + change) >= 0
+
+    def Enough_Stock(self, username, stock, change):
+        if len(self.user_file) == 0:
+            raise ValueError('user_file is empty????????????????')
+
+        if change >= 0:
+            return True
+        else:
+            for i, user in enumerate(self.user_file):
+                if user == username:
+                    stock_x = self.stocks.index(stock)
+                    return (self.user_file[i][stock_x] + change) >= 0
+        
+    def Modify_User_Cash(self, username, change):
+        if len(self.user_file) == 0:
+            raise ValueError('user_file is empty????????????????')
+
+        for i, user in enumerate(self.user_file):
+            if user == username:
+                if (self.user_file[i][1] + change) >= 0:
+                    self.user_file[i][1] += change
+
+    def Modify_User_Stock(self, username, stock, change):
+        if len(self.user_file) == 0:
+            raise ValueError('user_file is empty????????????????')
+
+        for i, user in enumerate(self.user_file):
+            if user == username:
+                stock_x = self.stocks.index(stock)
+                if (self.user_file[i][stock_x] + change) >= 0:
+                    self.user_file[i][stock_x] += change
+        
+
+
+    
 
 k = User()
 k.Import_From_NME()

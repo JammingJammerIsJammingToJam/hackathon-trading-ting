@@ -70,7 +70,7 @@ def NME_Encode_File(filename, data):
                     if len(item) == 0:
                         text += '/'
                     else:
-                        if any(char == '/' for char in item):
+                        if '/' in item:
                             raise ValueError('NME files do not support /')
                         text += item
                         text += '/'
