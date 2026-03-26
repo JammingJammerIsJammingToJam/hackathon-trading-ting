@@ -1,2 +1,2 @@
-**Stocks**
-/    Apple, Banana, Cherry, Dragonfruit, and Elderflower
+**Stocks**  
+    Apple, Banana, Cherry, Dragonfruit, and Elderflower
