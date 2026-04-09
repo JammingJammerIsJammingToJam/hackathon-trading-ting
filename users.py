@@ -21,11 +21,16 @@ class User:
             with open('users.nme', 'w') as file_contents:
                 file_contents.write(str(7) + '\n')
         self.user_file = NME_Decode_File('users.nme')
+        for i, user in enumerate(self.user_file):
+            self.user_file[i] = [user[0]] + [int(num) for num in user[1:]]
 
     def Export_To_NME(self):
-        with open('users.nme', 'w') as file_contents:
-            file_contents.write(NME_Encode_File(self.user_file))
+        NME_Encode_File('users.nme', self.user_file)
 
+    def Create_User(self, username):
+        if not any(user[0] == username for user in self.user_file):
+            self.user_file.append([username, 0, 0, 0, 0, 0, 0])
+    
     def Enough_Cash(self, username, change):
         if len(self.user_file) == 0:
             raise ValueError('user_file is empty????????????????')
@@ -34,7 +39,7 @@ class User:
             return True
         else:
             for i, user in enumerate(self.user_file):
-                if user == username:
+                if user[0] == username:
                     return (self.user_file[i][1] + change) >= 0
 
     def Enough_Stock(self, username, stock, change):
@@ -45,7 +50,7 @@ class User:
             return True
         else:
             for i, user in enumerate(self.user_file):
-                if user == username:
+                if user[0] == username:
                     stock_x = self.stocks.index(stock)
                     return (self.user_file[i][stock_x] + change) >= 0
         
@@ -54,7 +59,7 @@ class User:
             raise ValueError('user_file is empty????????????????')
 
         for i, user in enumerate(self.user_file):
-            if user == username:
+            if user[0] == username:
                 if (self.user_file[i][1] + change) >= 0:
                     self.user_file[i][1] += change
 
@@ -63,15 +68,10 @@ class User:
             raise ValueError('user_file is empty????????????????')
 
         for i, user in enumerate(self.user_file):
-            if user == username:
+            if user[0] == username:
                 stock_x = self.stocks.index(stock)
                 if (self.user_file[i][stock_x] + change) >= 0:
                     self.user_file[i][stock_x] += change
-        
-
 
     
 
-k = User()
-k.Import_From_NME()
-print(k.user_file)

@@ -31,7 +31,8 @@ class Stock:
       self.sell_orders = ast.literal_eval(k[1])
   
   def place_buy_order(self, user, amount, price):
-    if len(self.buy_orders) == 0: self.buy_orders.append([user, amount, price])
+    if len(self.buy_orders) == 0:
+      self.buy_orders.append([user, amount, price])
     else:
       j = 0
       for i, order in enumerate(self.buy_orders):
