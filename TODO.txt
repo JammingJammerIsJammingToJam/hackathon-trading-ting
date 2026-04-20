@@ -1,0 +1,8 @@
+- Check if user exists when editing values
+- Change user values during transactions
+- OPTIONAL Add functionality to delete users
+- OPTIONAL Migrate stocks to NME to better functionality
+- Server functionality?
+- Interface for users
+- Interface for admin
+- Make hackable if using for hackthon

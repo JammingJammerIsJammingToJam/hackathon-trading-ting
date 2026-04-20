@@ -73,5 +73,4 @@ class User:
                 if (self.user_file[i][stock_x] + change) >= 0:
                     self.user_file[i][stock_x] += change
 
-    
 
