@@ -1,5 +1,6 @@
 - Check if user exists when editing values
-- Change user values during transactions
+- Add Cancelling Orders eg J buys back 10 of J's stocks - doesn't require cash check 
+- Add Market Orders (instant buy/sell)
 - OPTIONAL Add functionality to delete users
 - OPTIONAL Migrate stocks to NME to better functionality
 - Server functionality?

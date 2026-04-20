@@ -14,7 +14,7 @@ NME slashnum = 7
 class User:
     def __init__(self):
         self.user_file  = []
-        self.stocks = [None, None, 'Apple', 'Banana', 'Cherry', 'Dragonfruit', 'Elderflower']
+        self.stocks = [None, None, 'apple', 'banana', 'cherry', 'dragonfruit', 'elderflower']
     
     def Import_From_NME(self):
         if not os.path.isfile('users.nme'):
