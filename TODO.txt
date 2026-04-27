@@ -1,9 +1,9 @@
-- Check if user exists when editing values
+- Check if user exists when editing values DONE
 - Add Cancelling Orders eg J buys back 10 of J's stocks - doesn't require cash check 
-- Add Market Orders (instant buy/sell)
+- Add Market Orders (instant buy/sell) DONE
 - OPTIONAL Add functionality to delete users
 - OPTIONAL Migrate stocks to NME to better functionality
 - Server functionality?
 - Interface for users
 - Interface for admin
-- Make hackable if using for hackthon
+- Make hackable if using for hackathon

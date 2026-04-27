@@ -28,8 +28,11 @@ class User:
         NME_Encode_File('users.nme', self.user_file)
 
     def Create_User(self, username):
-        if not any(user[0] == username for user in self.user_file):
+        if not self.Is_User(username):
             self.user_file.append([username, 0, 0, 0, 0, 0, 0])
+    
+    def Is_User(self, username):
+        return any(user[0] == username for user in self.user_file)
     
     def Enough_Cash(self, username, change):
         if len(self.user_file) == 0:

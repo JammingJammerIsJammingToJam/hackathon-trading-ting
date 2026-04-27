@@ -34,6 +34,9 @@ class Stock:
       self.sell_orders = ast.literal_eval(k[1])
   
   def place_buy_order(self, user, amount, price):
+    if not self.users.Is_User(user):
+      print("User doesn't exist")
+      return
     if self.users.Enough_Cash(user, 0-(amount * price)):
       if len(self.buy_orders) == 0:
         self.buy_orders.append([user, amount, price])
@@ -53,6 +56,9 @@ class Stock:
 
   
   def place_sell_order(self, user, amount, price):
+    if not self.users.Is_User(user):
+      print("User doesn't exist")
+      return
     if self.users.Enough_Stock(user, self.name, 0-amount):
       if len(self.sell_orders) == 0: 
         self.sell_orders.append([user, amount, price])
@@ -71,26 +77,47 @@ class Stock:
     else:
       print('Not enough stock')
   
-  """
-  Fix this 
   def market_buy(self, user, amount):
-    price = self.sell_orders[0][2]
-    change = self.sell_orders[0][1]
-    while amount > 0 and self.users.Enough_Cash(user, 0-(amount * price)):
-      if amount >= change:
-        self.place_buy_order(user, change, price)
-        amount -= change
-        price = self.sell_orders[0][2]
-        change = self.sell_orders[0][1]
-      else:
-        self.place_buy_order(user, amount, price)
-        break
+    if not self.users.Is_User(user):
+      print("User doesn't exist")
+      return
+    while amount > 0:
+      if len(self.sell_orders) == 0:
+        print('No sell orders remaining')
+        return
       price = self.sell_orders[0][2]
       change = self.sell_orders[0][1]
-  """
+      if self.users.Enough_Cash(user, 0-(amount * price)):
+        if amount >= change:
+          self.place_buy_order(user, change, price)
+          amount -= change
+        else:
+          self.place_buy_order(user, amount, price)
+          break
+      else:
+        print('Not enough cash')
+        return
       
 
-  def market_sel
+  def market_sell(self, user, amount):
+    if not self.users.Is_User(user):
+      print("User doesn't exist")
+      return
+    if self.users.Enough_Stock(user, self.name, 0-amount):
+      while amount > 0:
+        if len(self.buy_orders) == 0:
+          print('No buy orders remaining')
+          return
+        price = self.buy_orders[0][2]
+        change = self.buy_orders[0][1]
+        if amount >= change:
+          self.place_sell_order(user, change, price)
+          amount -= change
+        else:
+          self.place_sell_order(user, amount, price)
+          break
+    else:
+      print('Not enough stock')
 
   def write_stock_to_file(self):
     with open(f'{self.name}.txt', 'w') as text:
@@ -157,9 +184,11 @@ del users
 apple = Stock('apple')
 apple.clear_stock()
 
-apple.place_sell_order("j", 123, 1)
-apple.place_sell_order("k", 124, 3)
-apple.place_buy_order("j", 13, 2)
+apple.place_sell_order('h', 6, 10)
+apple.place_sell_order('j', 1, 11)
+apple.market_buy('k', 7)
+#apple.place_buy_order('j', 7, 10)
+#apple.market_sell('k', 7)
 
 print(apple.buy_orders)
 print(apple.sell_orders)
